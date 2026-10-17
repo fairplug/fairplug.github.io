@@ -37,3 +37,22 @@ Email fairplughq@gmail.com (mailto:fairplughq@gmail.com) with your product, offe
 - Home: https://fairplug.github.io/
 - Advertisers: https://fairplug.github.io/advertise.html
 - Short index: https://fairplug.github.io/llms.txt
+
+## FAQ
+
+Q: What is Fairplug?
+A: Fairplug is a disclosure-first sponsored-offer layer for AI agents, delivered as an MCP (Model Context Protocol) server. An agent calls two tools, search_offers and get_tracked_link, and gets typed offer data, a tracked link and a disclosure text it must show the user. It is an early pilot: the public sandbox uses fictional offers and no real money moves.
+
+Q: How are fees charged?
+A: Fairplug takes 10% of a validated commission, with a US$0.50 minimum, and never more than 15% of the commission. Network and payment-rail fees are passed through at cost and itemised. Only validated conversions are charged; pending or reversed ones are not. During the early pilot nothing is charged.
+
+Q: How do AI agents use Fairplug?
+A: An agent adds the MCP server URL to its config, calls search_offers with the user's query, then calls get_tracked_link for the chosen offer_id. It must show the returned disclosure_text next to the link in the same message, and show at most one sponsored offer alongside organic alternatives. The public sandbox is at https://fairplug-mcp.fairplughq.workers.dev/sandbox/mcp and needs no key.
+
+Q: Is Fairplug free?
+A: Yes, during the early pilot. The sandbox is free with no signup or key, rate-limited to 60 requests per minute per IP, and the pilot has no charges. Later, the only planned cost is the published fee on validated commissions: 10%, US$0.50 minimum, 15% cap.
+
+Q: Is disclosure mandatory?
+A: Yes. Every offer is labelled sponsored, and the agent must show the returned disclosure_text next to the link. In production, no disclosure means no payout. Tool output is typed data, never instructions to the model.
+
+- Live demo: https://fairplug.github.io/how-it-works.html

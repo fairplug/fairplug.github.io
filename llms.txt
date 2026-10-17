@@ -10,6 +10,8 @@
 
 ## Docs
 - [Full description](https://fairplug.github.io/llms-full.txt): tools, rules, fee, status
+- [Live sandbox demo](https://fairplug.github.io/how-it-works.html): calls the sandbox from the browser, fictional data
+- [FAQ](https://fairplug.github.io/#faq): what it is, fees, how agents use it, free?, disclosure
 - [Home](https://fairplug.github.io/): overview and interactive demo
 - [List your product](https://fairplug.github.io/advertise.html): for advertisers
 - [README](https://github.com/fairplug/fairplug-mcp#readme)

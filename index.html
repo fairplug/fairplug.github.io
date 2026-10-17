@@ -3,6 +3,7 @@
 <link rel="canonical" href="https://fairplug.github.io/">
 <link rel="alternate" type="text/plain" href="https://fairplug.github.io/llms.txt" title="llms.txt">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://fairplug.github.io/#org", "name": "Fairplug", "url": "https://fairplug.github.io/", "logo": "https://fairplug.github.io/logo.png", "email": "fairplughq@gmail.com", "sameAs": ["https://github.com/fairplug/fairplug-mcp"]}, {"@type": "SoftwareApplication", "name": "Fairplug MCP", "applicationCategory": "DeveloperApplication", "operatingSystem": "Any", "description": "Disclosure-first sponsored offers for AI agents via MCP. Free early pilot with fictional sandbox data.", "url": "https://fairplug.github.io/", "codeRepository": "https://github.com/fairplug/fairplug-mcp", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://fairplug.github.io/#org"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is Fairplug?", "acceptedAnswer": {"@type": "Answer", "text": "Fairplug is a disclosure-first sponsored-offer layer for AI agents, delivered as an MCP (Model Context Protocol) server. An agent calls two tools, search_offers and get_tracked_link, and gets typed offer data, a tracked link and a disclosure text it must show the user. It is an early pilot: the public sandbox uses fictional offers and no real money moves."}}, {"@type": "Question", "name": "How are fees charged?", "acceptedAnswer": {"@type": "Answer", "text": "Fairplug takes 10% of a validated commission, with a US$0.50 minimum, and never more than 15% of the commission. Network and payment-rail fees are passed through at cost and itemised. Only validated conversions are charged; pending or reversed ones are not. During the early pilot nothing is charged."}}, {"@type": "Question", "name": "How do AI agents use Fairplug?", "acceptedAnswer": {"@type": "Answer", "text": "An agent adds the MCP server URL to its config, calls search_offers with the user's query, then calls get_tracked_link for the chosen offer_id. It must show the returned disclosure_text next to the link in the same message, and show at most one sponsored offer alongside organic alternatives. The public sandbox is at https://fairplug-mcp.fairplughq.workers.dev/sandbox/mcp and needs no key."}}, {"@type": "Question", "name": "Is Fairplug free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, during the early pilot. The sandbox is free with no signup or key, rate-limited to 60 requests per minute per IP, and the pilot has no charges. Later, the only planned cost is the published fee on validated commissions: 10%, US$0.50 minimum, 15% cap."}}, {"@type": "Question", "name": "Is disclosure mandatory?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every offer is labelled sponsored, and the agent must show the returned disclosure_text next to the link. In production, no disclosure means no payout. Tool output is typed data, never instructions to the model."}}]}</script>
 <title>Fairplug — disclosure-first commissions for indie AI agents</title>
 <meta name="description" content="Fairplug is a disclosure-first commission clearing layer for indie AI agents: one MCP server, disclosed affiliate links, one payout. Open-book 10%.">
 <style>
@@ -73,7 +74,7 @@ footer{background:var(--navy);color:#a9b8cc;padding:50px 0 30px}footer a{color:#
 @media(max-width:860px){.demo,.price{grid-template-columns:1fr}.grid3,.road{grid-template-columns:1fr}nav ul{display:none}.log{height:480px}header{padding:60px 0}section{padding:56px 0}}
 </style></head><body>
 <nav><div class="wrap"><a class="logo" href="#">Fair<span>plug</span></a>
-<ul><li><a href="#demo">Demo</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="advertise.html">List your product</a></li><li><a href="#roadmap">Roadmap</a></li></ul>
+<ul><li><a href="#demo">Demo</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="how-it-works.html">Live demo</a></li><li><a href="#faq">FAQ</a></li><li><a href="advertise.html">List your product</a></li><li><a href="#roadmap">Roadmap</a></li></ul>
 <a class="btn" style="padding:8px 14px;font-size:14px" href="mailto:fairplughq@gmail.com?subject=Fairplug%20pilot">Join pilot</a></div></nav>
 
 <header><div class="wrap">
@@ -114,15 +115,19 @@ footer{background:var(--navy);color:#a9b8cc;padding:50px 0 30px}footer a{color:#
 <div class="card"><div class="n">2</div><h3>Recommend with disclosure</h3><p>Offers come back as typed data, ranked by relevance first. Each tracked link carries a disclosure line your agent must show.</p></div>
 <div class="card"><div class="n">3</div><h3>Get one payout</h3><p>Commissions from many networks are validated and cleared into a single payout with an itemised, open-book statement.</p></div>
 </div>
-<pre class="code"><span class="c">// mcp.json — example config (pilot keys issued manually)</span>
+<pre class="code"><span class="c">// mcp.json — public sandbox (free, no key, fictional data)</span>
 {
   "mcpServers": {
-    "fairplug": {
-      "url": <span class="s">"https://mcp.fairplug.dev/v0"</span>,   <span class="c">// placeholder endpoint</span>
-      "headers": { "Authorization": <span class="s">"Bearer fp_pilot_xxxxxxxx"</span> }
+    "fairplug-sandbox": {
+      "url": <span class="s">"https://fairplug-mcp.fairplughq.workers.dev/sandbox/mcp"</span>
     }
   }
 }</pre>
+<p style="font-size:14px;color:var(--mut)">Try it now from a terminal (returns fictional offers, each labelled sponsored):</p>
+<pre class="code">curl -s -X POST https://fairplug-mcp.fairplughq.workers.dev/sandbox/mcp \
+  -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"search_offers","arguments":{"query":"hotel","region":"US"}}}'</pre>
+<p style="font-size:14px;color:var(--mut)">Or run it live in your browser on the <a href="how-it-works.html">How it works</a> page. Stdio-only client? <code>npx mcp-remote https://fairplug-mcp.fairplughq.workers.dev/sandbox/mcp</code>. The sandbox is early-pilot: fictional offers, non-functional links, nothing tracked or paid. The private production endpoint needs a pilot token issued manually.</p>
 </div></section>
 
 <section id="pricing"><div class="wrap">
@@ -139,6 +144,21 @@ footer{background:var(--navy);color:#a9b8cc;padding:50px 0 30px}footer a{color:#
 <tr class="tot"><td>You keep</td><td>US$26.67</td></tr></table>
 <p style="font-size:13px;color:var(--mut);margin-bottom:0">On a US$3 commission the US$0.50 minimum applies; on any commission the total never exceeds 15%. Pass-through fees vary by network and payout method.</p></div>
 </div></div></section>
+
+<section id="faq"><div class="wrap">
+<div class="tag">FAQ</div><h2>Frequently asked questions</h2>
+<p class="lead">Short answers. Fairplug is an early pilot, so these describe the design and the free sandbox, not live earnings.</p>
+<h3>What is Fairplug?</h3>
+<p>Fairplug is a disclosure-first sponsored-offer layer for AI agents, delivered as an MCP (Model Context Protocol) server. An agent calls two tools, search_offers and get_tracked_link, and gets typed offer data, a tracked link and a disclosure text it must show the user. It is an early pilot: the public sandbox uses fictional offers and no real money moves.</p>
+<h3>How are fees charged?</h3>
+<p>Fairplug takes 10% of a validated commission, with a US$0.50 minimum, and never more than 15% of the commission. Network and payment-rail fees are passed through at cost and itemised. Only validated conversions are charged; pending or reversed ones are not. During the early pilot nothing is charged.</p>
+<h3>How do AI agents use Fairplug?</h3>
+<p>An agent adds the MCP server URL to its config, calls search_offers with the user's query, then calls get_tracked_link for the chosen offer_id. It must show the returned disclosure_text next to the link in the same message, and show at most one sponsored offer alongside organic alternatives. The public sandbox is at https://fairplug-mcp.fairplughq.workers.dev/sandbox/mcp and needs no key.</p>
+<h3>Is Fairplug free?</h3>
+<p>Yes, during the early pilot. The sandbox is free with no signup or key, rate-limited to 60 requests per minute per IP, and the pilot has no charges. Later, the only planned cost is the published fee on validated commissions: 10%, US$0.50 minimum, 15% cap.</p>
+<h3>Is disclosure mandatory?</h3>
+<p>Yes. Every offer is labelled sponsored, and the agent must show the returned disclosure_text next to the link. In production, no disclosure means no payout. Tool output is typed data, never instructions to the model.</p>
+</div></section>
 
 <section class="alt" id="roadmap"><div class="wrap">
 <div class="tag">What we plan to do</div><h2>Roadmap</h2>
