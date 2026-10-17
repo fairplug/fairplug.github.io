@@ -1,0 +1,23 @@
+{
+    "serverInfo": {
+        "name": "fairplug-sandbox",
+        "version": "0.1.0"
+    },
+    "description": "Fairplug sandbox: fictional sponsored offers with disclosure-first rules. Read-only, no signup, nothing tracked or paid. Early pilot.",
+    "transport": {
+        "type": "streamable-http",
+        "url": "https://fairplug-mcp.fairplughq.workers.dev/sandbox/mcp"
+    },
+    "authentication": {
+        "required": false
+    },
+    "tools": [
+        {
+            "name": "search_offers"
+        },
+        {
+            "name": "get_tracked_link"
+        }
+    ],
+    "documentation": "https://github.com/fairplug/fairplug-mcp"
+}

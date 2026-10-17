@@ -1,0 +1,18 @@
+# Fairplug
+
+> Fairplug is a disclosure-first sponsored-offer layer for AI agents, delivered as an MCP server. Offers come back as typed data with a tracked link and a disclosure text the assistant must show. EARLY PILOT: the offers are fictional example data, there are no live advertisers yet, and no real money moves.
+
+## Try it (free, no signup, no key)
+- MCP sandbox (streamable HTTP, read-only, fictional data): https://fairplug-mcp.fairplughq.workers.dev/sandbox/mcp
+- Server card: https://fairplug.github.io/.well-known/mcp/server-card.json
+- Source repo (MIT): https://github.com/fairplug/fairplug-mcp
+- MCP registry name: io.github.FairPlugHQ/fairplug-mcp
+
+## Docs
+- [Full description](https://fairplug.github.io/llms-full.txt): tools, rules, fee, status
+- [Home](https://fairplug.github.io/): overview and interactive demo
+- [List your product](https://fairplug.github.io/advertise.html): for advertisers
+- [README](https://github.com/fairplug/fairplug-mcp#readme)
+
+## Contact
+fairplughq@gmail.com
